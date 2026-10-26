@@ -1,0 +1,56 @@
+# ── Environment & Security Secrets (CRITICAL) ─────────────
+.env
+.env.*
+!.env.example
+
+# ── Capstone Documentation (ignored for now) ───────────────
+docs/
+
+# ── Java & Maven Build Output ──────────────────────────────
+target/
+**/target/
+*.class
+*.jar
+*.war
+*.ear
+*.nar
+
+# ── Node.js & Frontend Build Output ────────────────────────
+node_modules/
+**/node_modules/
+dist/
+**/dist/
+frontend/dist/
+.npm/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# ── Local File Storage & Logs ──────────────────────────────
+uploads/
+**/uploads/
+logs/
+**/logs/
+*.log
+temp/
+tmp/
+
+# ── IDE & Editor Configurations ────────────────────────────
+.idea/
+*.iml
+*.iws
+*.ipr
+.vscode/
+*.swp
+*.swo
+.project
+.classpath
+.settings/
+
+# ── Operating System Junk ──────────────────────────────────
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# ── Spring Boot DevTools ───────────────────────────────────
+.spring-boot-devtools.properties

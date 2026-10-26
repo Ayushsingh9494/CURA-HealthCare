@@ -1,0 +1,38 @@
+# ============================================================
+# CURA — Docker Compose
+# ============================================================
+# Development usage:
+#   docker compose up -d          # start PostgreSQL in background
+#   docker compose down           # stop and remove containers
+#   docker compose down -v        # stop AND delete all data (fresh start)
+#
+# The Spring Boot backend and React frontend run locally (not in Docker
+# during development). Only the database is containerised here.
+# Full Docker deployment (M10) will containerise everything.
+# ============================================================
+
+services:
+
+  # ── PostgreSQL + PostGIS ──────────────────────────────────
+  postgres:
+    image: postgis/postgis:16-3.4
+    container_name: cura_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB:       ${DB_NAME:-cura}
+      POSTGRES_USER:     ${DB_USERNAME:-cura}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-cura}
+    ports:
+      - "${DB_PORT:-5432}:5432"
+    volumes:
+      - cura_postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USERNAME:-cura} -d ${DB_NAME:-cura}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+volumes:
+  cura_postgres_data:
+    driver: local
